@@ -17,7 +17,7 @@ export default function Home() {
       >
         QUOTE
       </motion.p>
-   
+
       <motion.p
         className="font-satoshi text-center text-3xl z-10 w-[50%] dark:text-white"
         initial={{ opacity: 0, y: 10 }}
@@ -25,10 +25,12 @@ export default function Home() {
         viewport={{ once: true }}
         transition={{ mass: 200, duration: 1, ease: "easeInOut", delay: 0.4 }}
       >
-      A dollar-pegged decentralized<br/>stablecoin backed by ETH
+        A dollar-pegged decentralized
+        <br />
+        stablecoin backed by ETH
       </motion.p>
       <button
-        className="bg-primary hover:bg-pink-600 hover:scale-90 w-52 px-5 h-14 text-white rounded-full transition-all font-satoshi my-7"
+        className="bg-primary hover:bg-pink-600 hover:scale-90 w-52 px-5 h-14 text-white rounded-full transition-all font-satoshi my-7 z-50"
         onClick={() => {
           navigate("/app");
         }}
@@ -42,14 +44,14 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ mass: 200, duration: 1, ease: "easeInOut", delay: 0.4 }}
-   />
+      />
       <motion.div
         className="w-52 h-52 absolute top-32 left-0 bg-blur dark:bg-blur-dark dark:opacity-70 blur-3xl"
         initial={{ x: 0, y: 0 }}
         animate={{ x: 20, y: -20 }}
         transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }}
       />
-        <motion.div
+      <motion.div
         className="w-52 h-52 absolute bottom-20 left-10 bg-blur dark:bg-blur-dark dark:opacity-70 blur-3xl"
         initial={{ x: 0, y: 0 }}
         animate={{ x: -20, y: 20 }}
@@ -61,14 +63,14 @@ export default function Home() {
         animate={{ x: 20, y: -20 }}
         transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }}
       />
- <motion.img
+      <motion.img
         className="font-satoshi absolute w-[80%] top-0"
         src="/circle.svg"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ mass: 200, duration: 1, ease: "easeInOut", delay: 0.4 }}
-   />
+      />
     </main>
   );
 }
