@@ -39,9 +39,10 @@ export const Header: React.FC<HeaderProps> = ({
       className={`flex flex-row fixed w-screen backdrop-blur h-22 items-center justify-between bg-background dark:bg-background-dark px-24 z-50 py-4 bg-opacity-5 dark:bg-opacity-5 ${className}`}
       {...props}
     >
-      <img src="./quote_coin.svg" className="object-contain w-12 h-12" />
+     
 
-      <section className="flex flex-row items-center justify-center gap-x-20 ml-32">
+      <section className="flex flex-row items-center justify-center gap-x-20 ">
+      <img src="./quote_coin.svg" className="object-contain w-12 h-12 mr-8" />
         {HeaderItems.map((item) => (
           <button
             className="flex flex-col items-center text-black dark:text-white hover:text-primary hover:dark:text-pink-300 font-satoshi-medium transition-all"
@@ -145,7 +146,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
   return (
     <header
-      className={`flex flex-row fixed w-screen backdrop-blur h-22 items-center justify-between bg-background px-24 z-50 py-4 bg-opacity-5 ${className}`}
+      className={`flex flex-row fixed w-screen backdrop-blur h-22 items-center justify-between bg-background dark:bg-background-dark px-24 z-50 py-4 bg-opacity-5 ${className}`}
       {...props}
     >
       <section className="flex flex-row items-center justify-center gap-x-20">
@@ -158,7 +159,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         />
         {AppHeaderItems.map((item) => (
           <button
-            className="flex flex-col items-center text-black hover:text-primary font-satoshi-medium transition-all"
+            className="flex flex-col items-center text-black hover:text-primary dark:text-white dark:hover:text-pink-300 font-satoshi-medium transition-all"
             onClick={() => {
               setRoute(item.route);
               animateBorder();

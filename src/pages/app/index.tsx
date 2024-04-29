@@ -1,21 +1,18 @@
 import { AppHeader, Line } from "@components";
 import { useState } from "react";
-import Mint from "./mint";
-import Redeem from "./redeem";
 import Pool from "./pool";
 import { Icon } from "@iconify/react";
 import { openLink } from "../../lib/utils";
 import {motion} from "framer-motion"
 import { METAMASK_LINK, TRUST_WALLET_LINK } from "@constants";
+import Dashboard from "./dashboard";
 
 export default function AppLanding() {
-  const [route, setRoute] = useState<string>("Mint");
+  const [route, setRoute] = useState<string>("Dashboard");
   const [showWallet, setShowWallet] = useState<boolean>(false);
   const ShowRoute = () => {
-    if (route === "Mint") {
-      return <Mint />;
-    } else if (route === "Redeem") {
-      return <Redeem />;
+    if (route === "Dashboard") {
+      return <Dashboard />;
     } else if (route === "Pool") {
       return <Pool />;
     }

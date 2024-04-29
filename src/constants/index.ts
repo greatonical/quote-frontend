@@ -4,11 +4,11 @@ export const HeaderItems = [
     hashId: "home",
     route: "Home",
   },
-  {
-    id: 1,
-    hashId: "works",
-    route: "How It Works",
-  },
+  // {
+  //   id: 1,
+  //   hashId: "works",
+  //   route: "How It Works",
+  // },
   {
     id: 2,
     hashId: "docs",
@@ -24,16 +24,12 @@ export const HeaderItems = [
 export const AppHeaderItems = [
     {
       id: 0,
-      hashId: "mint",
-      route: "Mint",
+      hashId: "dashboard",
+      route: "Dashboard",
     },
+  
     {
       id: 1,
-      hashId: "redeem",
-      route: "Redeem",
-    },
-    {
-      id: 2,
       hashId: "pool",
       route: "Pool",
     }

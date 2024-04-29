@@ -3,7 +3,7 @@ import { Button, DropDownView } from "@components";
 import { MintToken, walletConnection, checkConnectedWallet } from "../../lib/utils";
 import axios from "axios";
 
-export default function Mint() {
+export default function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
@@ -110,9 +110,9 @@ export default function Mint() {
 
   return (
     <main className="flex flex-col items-center justify-center pt-40 px-24">
-      <body className="bg-background-500 shadow-lg w-[50%] p-5 rounded-lg flex flex-col gap-y-4">
-        <section className="bg-neutral-800 bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between relative">
-          <div>
+      <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[50%] p-5 rounded-lg flex flex-col gap-y-4">
+        <section className="bg-neutral-800 bg-opacity-5 dark:bg-background-700-dark  p-5 rounded-xl flex flex-row items-center justify-between relative">
+          <div className="">
             <p className="font-satoshi-medium">Deposit</p>
             <input
               className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl"
@@ -143,7 +143,7 @@ export default function Mint() {
           />
         </section>
 
-        <section className="bg-neutral-800 bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between relative">
+        <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between relative">
           <div>
             <p className="font-satoshi-medium">Mint</p>
             <input

@@ -21,7 +21,9 @@ export default {
         "background-500": "#F9F4F4",
         blur: "#627EEA",
         "blur-dark": "#5B054D",
-        "holder": "#24111F"
+        "holder": "#24111F",
+        "background-500-dark": "#24111F",
+        "background-700-dark": "#1C0816",
       },
       fontFamily: {
         "satoshi-light": ["Satoshi-Light", "sans-serif"],

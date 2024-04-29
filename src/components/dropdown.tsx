@@ -22,16 +22,16 @@ export const DropDownView: React.FC<DropdownProps> = ({
   ...props
 }) => {
   return (
-    <DropDownContainer className="w-fit bg-primary-200 rounded-3xl px-4 py-2" {...props}>
+    <DropDownContainer className="w-fit bg-primary-200 dark:bg-holder rounded-3xl px-4 py-2" {...props}>
       <DropDownHeader className="cursor-pointer" onClick={toggling}>
         {selectedOption ? (
-          <div className="flex flex-row items-center gap-x-2 ">
+          <div className="flex flex-row items-center gap-x-2 dark:text-white">
             <img className="w-10 h-10" src={selectedImage} />
             {selectedOption}
             <Icon icon={"simple-line-icons:arrow-down"} className="w-4 h-4" />
           </div>
         ) : (
-          <div className="flex flex-row items-center gap-x-2 ">
+          <div className="flex flex-row items-center gap-x-2 dark:bg-holder dark:text-white">
             <img className="w-10 h-10" src={defaultImage} />
             {defaultOption}
             <Icon icon={"simple-line-icons:arrow-down"} className="w-4 h-4" />
@@ -47,7 +47,7 @@ export const DropDownView: React.FC<DropdownProps> = ({
                 onClick={() => {onOptionClicked(option.coin, option.image); toggling()}}
                 key={Math.random()}
               >
-                <button className="flex flex-row items-center gap-x-2 mt-4">
+                <button className="flex flex-row items-center gap-x-2 mt-4 dark:text-white">
                   <img className="w-10 h-10" src={option.image} />
                   {option.coin}
                 </button>
@@ -76,13 +76,13 @@ export const ChainDropDownView: React.FC<DropdownProps> = ({
       <DropDownContainer className={`w-fit rounded-3xl px-4 py-2 ${className}`} {...props}>
         <DropDownHeader className="cursor-pointer" onClick={toggling}>
           {selectedOption ? (
-            <div className="flex flex-row items-center gap-x-2 ">
+            <div className="flex flex-row items-center gap-x-2 dark:text-white">
               <img className="w-10 h-10" src={selectedImage} />
               {selectedOption}
               <Icon icon={"simple-line-icons:arrow-down"} className="w-4 h-4" />
             </div>
           ) : (
-            <div className="flex flex-row items-center gap-x-2 ">
+            <div className="flex flex-row items-center gap-x-2 dark:text-white">
               <img className="w-10 h-10" src={defaultImage} />
               {defaultOption}
               <Icon icon={"simple-line-icons:arrow-down"} className="w-4 h-4" />
@@ -98,7 +98,7 @@ export const ChainDropDownView: React.FC<DropdownProps> = ({
                   onClick={() => {onOptionClicked(option.coin, option.image); toggling()}}
                   key={Math.random()}
                 >
-                  <button className="flex flex-row items-center gap-x-2 mt-4">
+                  <button className="flex flex-row items-center gap-x-2 mt-4 dark:text-white">
                     <img className="w-10 h-10" src={option.image} />
                     {option.coin}
                   </button>
