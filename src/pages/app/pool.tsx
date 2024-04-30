@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button, DropDownView } from "@components";
-import { checkConnectedWallet, MintLETH, walletConnection } from "../../lib/utils";
+import { checkConnectedWallet, walletConnection } from "../../lib/utils";
 import { Icon } from "@iconify/react";
+import { mintLETH } from "./utilFUnctions/PublicProviderFunctions";
 
 export default function Pool() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,9 +52,9 @@ export default function Pool() {
       <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[50%] p-5 rounded-lg flex flex-col gap-y-4 items-center">
         <section className="bg-neutral-800 bg-opacity-5 dark:bg-background-700-dark p-5 rounded-xl flex flex-row items-center justify-between">
           <div>
-            <p className="font-satoshi-medium">Deposit</p>
+            <p className="font-satoshi-medium dark:text-white">Deposit</p>
             <input
-              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl"
+              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl dark:text-white"
               type="number"
               placeholder="0"
               min={0}
@@ -95,13 +96,13 @@ export default function Pool() {
           className="w-fit h-fit p-3 rounded-full bg-neutral-800 bg-opacity-5 "
           onClick={switchCoins}
         >
-          <Icon icon={"fluent:arrow-sort-24-regular"} className="w-10 h-10" />
+          <Icon icon={"fluent:arrow-sort-24-regular"} className="w-10 h-10 dark:text-white" />
         </button>
         <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
           <div>
-            <p className="font-satoshi-medium">Get</p>
+            <p className="font-satoshi-medium dark:text-white">Get</p>
             <input
-              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl"
+              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl dark:text-white"
               type="number"
               placeholder="0"
               min={0}
@@ -143,7 +144,7 @@ export default function Pool() {
         <Button
             className="w-full disabled:bg-neutral-600 disabled:hover:scale-100"
             disabled={!connected}
-          onClick={()=>{MintLETH(currentAccount, ethInput)}}
+          onClick={()=>{mintLETH(BigInt(ethInput))}}
           text={`${connected ? "Deposit" : "Connect Wallet"}`}
         />
       </body>

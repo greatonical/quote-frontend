@@ -1,12 +1,12 @@
 import { useState, useEffect,Dispatch, SetStateAction } from "react";
 import { Button, DropDownView } from "@components";
 import {
-  MintToken,
   walletConnection,
   checkConnectedWallet,
 } from "../../src/lib/utils";
 import axios from "axios";
 import { Icon } from "@iconify/react";
+import { mintQUOTE } from "../pages/app/utilFUnctions/PublicProviderFunctions";
 
 export default function MintModal({
   setShowModal,
@@ -191,7 +191,7 @@ export default function MintModal({
           className=" disabled:bg-neutral-600 disabled:hover:scale-100"
           disabled={!connected}
           onClick={() => {
-            MintToken(currentAccount, ethInput);
+           mintQUOTE(BigInt(quoteInput))
           }}
           text={`${connected ? "Mint" : "Connect Wallet"}`}
         />

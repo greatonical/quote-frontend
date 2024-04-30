@@ -3,6 +3,8 @@ import { Button, DropDownView } from "@components";
 import { checkConnectedWallet, walletConnection } from "../../src/lib/utils";
 import axios from "axios";
 import { Icon } from "@iconify/react";
+import { burnQUOTE } from "../pages/app/utilFUnctions/PublicProviderFunctions";
+
 
 export default function RedeemModal({
   setShowModal,
@@ -182,6 +184,7 @@ export default function RedeemModal({
         <Button
           className=" disabled:bg-neutral-600 disabled:hover:scale-100"
           disabled={!connected}
+          onClick={()=>{burnQUOTE(BigInt(quoteInput))}}
           text={`${connected ? "Redeem" : "Connect Wallet"}`}
         />
       </body>
