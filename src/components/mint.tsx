@@ -3,8 +3,8 @@ import { Button, DropDownView } from "@components";
 import { MintToken, walletConnection, checkConnectedWallet } from "../../src/lib/utils";
 import axios from "axios";
 
-export default function () {
-    const [isOpen, setIsOpen] = useState(false);
+export default function MintModal() {
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
@@ -109,13 +109,13 @@ export default function () {
   }, [quoteInput]);
 
   return (
-    <main className="flex flex-col items-center justify-center pt-40 px-24">
-      <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[50%] p-5 rounded-lg flex flex-col gap-y-4">
+    <main className="flex flex-col items-center justify-center absolute w-full h-full bg-black bg-opacity-80 top-0 left-0">
+      <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[40%] p-5 rounded-lg flex flex-col gap-y-4 self-center z-50">
         <section className="bg-neutral-800 bg-opacity-5 dark:bg-background-700-dark  p-5 rounded-xl flex flex-row items-center justify-between relative">
           <div className="">
-            <p className="font-satoshi-medium">Deposit</p>
+            <p className="font-satoshi-medium dark:text-white">Deposit</p>
             <input
-              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl"
+              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl dark:text-white"
               type="number"
               value={ethInput}
               onChange={(e) => {
@@ -145,9 +145,9 @@ export default function () {
 
         <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between relative">
           <div>
-            <p className="font-satoshi-medium">Mint</p>
+            <p className="font-satoshi-medium dark:text-white">Mint</p>
             <input
-              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl"
+              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl dark:text-white"
               type="number"
               placeholder="0"
               value={quoteInput}

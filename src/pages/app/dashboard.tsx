@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@components";
-import {
-  
-  walletConnection,
-  checkConnectedWallet,
-} from "../../lib/utils";
+import { walletConnection, checkConnectedWallet } from "../../lib/utils";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {MintModal} from "@components";
 
 export default function Dashboard() {
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [ethInput, setEthInput] = useState("");
   const [quoteInput, setQuoteInput] = useState("");
@@ -17,7 +14,6 @@ const navigate = useNavigate()
   const [connected, setConnected] = useState(false);
   const [currentAccount, setCurrentAccount] = useState();
   //   const [account] = useState();
-
 
   const [ethValue, setEthValue] = useState("");
   //@ts-ignore
@@ -40,7 +36,6 @@ const navigate = useNavigate()
     walletConnection(setConnected);
     checkConnectedWallet(setCurrentAccount, setConnected);
   }, [currentAccount, connected]);
-
 
   useEffect(() => {
     const convertValue = async () => {
@@ -111,11 +106,19 @@ const navigate = useNavigate()
           <div className={`bg-white opacity-15 w-full h-[0.5px] mt-4`} />
         </div>
 
-<div className="w-full flex flex-col items-center mt-10">
-<Button text="Create CDP" className="w-[50%]" onClick={()=>{navigate("/providers")}}/>
-</div>
-     
+        <div className="w-full flex flex-col items-center mt-10">
+          <Button
+            text="Create CDP"
+            className="w-[50%]"
+            onClick={() => {
+              navigate("/providers");
+            }}
+          />
+        </div>
       </body>
+      {
+        <MintModal/>
+      }
     </main>
   );
 }
