@@ -29,14 +29,14 @@ export default function Home() {
         <br />
         stablecoin backed by ETH
       </motion.p>
-      <button
+      {/* <button
         className="bg-primary hover:bg-pink-600 hover:scale-90 w-52 px-5 h-14 text-white rounded-full transition-all font-satoshi my-7 z-50"
         onClick={() => {
           navigate("/app");
         }}
       >
         Start Minting
-      </button>
+      </button> */}
       <motion.img
         className="font-satoshi text-center text-3xl z-10 w-[50%]"
         src="/macbook_home.svg"

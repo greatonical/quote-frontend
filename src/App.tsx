@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLanding, Landing } from "@pages";
+import Provider from "./pages/app/providers";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
        <Routes>
         <Route path="/" element={ <Landing/>}/>
         <Route path="/app" element={ <AppLanding/>}/>
+        <Route path="/providers" element={ <Provider/>}/>
       
        </Routes>
       </main>

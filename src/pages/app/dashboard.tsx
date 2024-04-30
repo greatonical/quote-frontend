@@ -1,51 +1,31 @@
 import { useState, useEffect } from "react";
-import { Button, DropDownView } from "@components";
-import { MintToken, walletConnection, checkConnectedWallet } from "../../lib/utils";
+import { Button } from "@components";
+import {
+  
+  walletConnection,
+  checkConnectedWallet,
+} from "../../lib/utils";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
+const navigate = useNavigate()
 
   const [ethInput, setEthInput] = useState("");
   const [quoteInput, setQuoteInput] = useState("");
-  const [isMintOpen, setMintIsOpen] = useState(false);
+
   const [connected, setConnected] = useState(false);
   const [currentAccount, setCurrentAccount] = useState();
   //   const [account] = useState();
-  const [selectedMintOption, setSelectedMintOption] = useState("");
-  const [selectedMintImage, setSelectedMintImage] = useState("");
 
-  //   const signer = provider.getSigner(account);
-  const options = [{ coin: "ETH", image: "./eth.svg" }];
-  const mintOptions = [{ coin: "QUOTE", image: "./quote_coin.svg" }];
 
-  const [ethValue, setEthValue] = useState("");  
-    //@ts-ignore
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-
+  const [ethValue, setEthValue] = useState("");
+  //@ts-ignore
+  // const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const [isEthInputFocused, setEthInputFocused] = useState<boolean | null>(
     false
   );
-
-  const toggling = () => setIsOpen(!isOpen);
-
-  const onOptionClicked = (value: any, image: any) => {
-    setSelectedOption(value);
-    setSelectedImage(image);
-    setIsOpen(false);
-    console.log("ss", selectedOption);
-  };
-  const mintToggling = () => setMintIsOpen(!isMintOpen);
-
-  const onMintOptionClicked = (value: any, image: any) => {
-    setSelectedMintOption(value);
-    setSelectedMintImage(image);
-    setMintIsOpen(false);
-    console.log("mss", selectedMintOption);
-  };
 
   useEffect(() => {
     axios
@@ -61,14 +41,6 @@ export default function Dashboard() {
     checkConnectedWallet(setCurrentAccount, setConnected);
   }, [currentAccount, connected]);
 
-
-  const handleFocus = () => {
-    setEthInputFocused(true);
-  };
-
-  const handleBlur = () => {
-    setEthInputFocused(false);
-  };
 
   useEffect(() => {
     const convertValue = async () => {
@@ -109,77 +81,40 @@ export default function Dashboard() {
   }, [quoteInput]);
 
   return (
-    <main className="flex flex-col items-center justify-center pt-40 px-24">
-      <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[50%] p-5 rounded-lg flex flex-col gap-y-4">
-        <section className="bg-neutral-800 bg-opacity-5 dark:bg-background-700-dark  p-5 rounded-xl flex flex-row items-center justify-between relative">
-          <div className="">
-            <p className="font-satoshi-medium">Deposit</p>
-            <input
-              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl"
-              type="number"
-              value={ethInput}
-              onChange={(e) => {
-                setEthInput(e.target.value);
-              }}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              placeholder="0"
-              min={0}
-            />
+    <main className="flex flex-col pt-40 px-24">
+      <body className="">
+        <span>
+          <p className="dark:text-white text-4xl">Balance</p>
+          <p className="text-primary text-3xl flex flex-row gap-x-4">
+            $0.00
+            <select className=" bg-white text-white text-base bg-opacity-15 px-1 rounded-full focus:outline-none">
+              <option>QUOTE</option>
+            </select>
+          </p>
+        </span>
 
-            <p className="text-neutral-500">1 ETH = ${ethValue}</p>
-          </div>
+        <object className="flex flex-row justify-between mt-14">
+          <p className="dark:text-white text-2xl">Positions</p>
+          <span className="flex flex-row gap-x-4">
+            <a className="text-primary underline text-lg">Mint Quote</a>
+            <a className="text-primary underline text-lg">Burn Quote</a>
+          </span>
+        </object>
+        <div className="dark:bg-holder p-5 rounded-xl mt-7">
+          <header className="w-full grid grid-cols-5 text-lg text-neutral-400 mt-1">
+            <p className="">Collateral Size</p>
+            <p className=" w-96">Quote Minted</p>
+            <p className=" w-96">Current Liq. Price</p>
+            <p className=" w-96">C.P.O</p>
+            <p className=" w-96">Rate P.A</p>
+          </header>
+          <div className={`bg-white opacity-15 w-full h-[0.5px] mt-4`} />
+        </div>
 
-          <DropDownView
-            className=""
-            defaultImage="./eth.svg"
-            defaultOption="ETH"
-            toggling={toggling}
-            options={options}
-            selectedOption={selectedOption}
-            selectedImage={selectedImage}
-            isOpen={isOpen}
-            onOptionClicked={onOptionClicked}
-          />
-        </section>
-
-        <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between relative">
-          <div>
-            <p className="font-satoshi-medium">Mint</p>
-            <input
-              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl"
-              type="number"
-              placeholder="0"
-              value={quoteInput}
-              onChange={(e) => {
-                setQuoteInput(e.target.value);
-              }}
-         
-              min={0}
-            />
-
-            <p className="text-neutral-500">1 QUOTE = 1 USD</p>
-          </div>
-
-          <DropDownView
-            className=""
-            defaultImage="./quote_coin.svg"
-            defaultOption="QUOTE"
-            toggling={mintToggling}
-            options={mintOptions}
-            selectedOption={selectedMintOption}
-            selectedImage={selectedMintImage}
-            isOpen={isMintOpen}
-            onOptionClicked={onMintOptionClicked}
-          />
-        </section>
-
-        <Button
-          className=" disabled:bg-neutral-600 disabled:hover:scale-100"
-          disabled={!connected}
-          onClick={() => {MintToken(currentAccount, ethInput)}}
-          text={`${connected ? "Mint" : "Connect Wallet"}`}
-        />
+<div className="w-full flex flex-col items-center mt-10">
+<Button text="Create CDP" className="w-[50%]" onClick={()=>{navigate("/providers")}}/>
+</div>
+     
       </body>
     </main>
   );
