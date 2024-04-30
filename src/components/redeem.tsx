@@ -1,14 +1,10 @@
-import { useState, useEffect,Dispatch, SetStateAction } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Button, DropDownView } from "@components";
-import {
-  MintToken,
-  walletConnection,
-  checkConnectedWallet,
-} from "../../src/lib/utils";
+import { checkConnectedWallet, walletConnection } from "../../src/lib/utils";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 
-export default function MintModal({
+export default function RedeemModal({
   setShowModal,
 }: {
   setShowModal: Dispatch<SetStateAction<boolean>>;
@@ -16,27 +12,22 @@ export default function MintModal({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
-
-  const [ethInput, setEthInput] = useState("");
-  const [quoteInput, setQuoteInput] = useState("");
   const [isMintOpen, setMintIsOpen] = useState(false);
   const [connected, setConnected] = useState(false);
-  const [currentAccount, setCurrentAccount] = useState();
-  //   const [account] = useState();
+  const [currentAccount, setCurrentAccount] = useState(null);
+  // const [account] = useState();
   const [selectedMintOption, setSelectedMintOption] = useState("");
   const [selectedMintImage, setSelectedMintImage] = useState("");
 
-  //   const signer = provider.getSigner(account);
-  const options = [{ coin: "ETH", image: "./eth.svg" }];
-  const mintOptions = [{ coin: "QUOTE", image: "./quote_coin.svg" }];
-
   const [ethValue, setEthValue] = useState("");
+  const [ethInput, setEthInput] = useState("");
+  const [quoteInput, setQuoteInput] = useState("");
+
   //@ts-ignore
   // const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-  const [isEthInputFocused, setEthInputFocused] = useState<boolean | null>(
-    false
-  );
+  // const signer = provider.getSigner(account);
+  const options = [{ coin: "ETH", image: "./eth.svg" }];
+  const mintOptions = [{ coin: "QUOTE", image: "./quote_coin.svg" }];
 
   const toggling = () => setIsOpen(!isOpen);
 
@@ -55,19 +46,9 @@ export default function MintModal({
     console.log("mss", selectedMintOption);
   };
 
-  useEffect(() => {
-    axios
-      .get("https://api.coingecko.com/api/v3/coins/ethereum")
-      .then((res: any) => {
-        console.log("eth usd", res.data.market_data.current_price.usd);
-        setEthValue(res.data.market_data.current_price.usd);
-      });
-  });
-
-  useEffect(() => {
-    walletConnection(setConnected);
-    checkConnectedWallet(setCurrentAccount, setConnected);
-  }, [currentAccount, connected]);
+  const [isEthInputFocused, setEthInputFocused] = useState<boolean | null>(
+    false
+  );
 
   const handleFocus = () => {
     setEthInputFocused(true);
@@ -76,6 +57,15 @@ export default function MintModal({
   const handleBlur = () => {
     setEthInputFocused(false);
   };
+
+  useEffect(() => {
+    axios
+      .get("https://api.coingecko.com/api/v3/coins/ethereum")
+      .then((res: any) => {
+        console.log("eth usd", res.data.market_data.current_price.usd);
+        setEthValue(res.data.market_data.current_price.usd);
+      });
+  });
 
   useEffect(() => {
     const convertValue = async () => {
@@ -115,9 +105,14 @@ export default function MintModal({
     convertValue();
   }, [quoteInput]);
 
+  useEffect(() => {
+    walletConnection(setConnected);
+    checkConnectedWallet(setCurrentAccount, setConnected);
+  }, [currentAccount, connected]);
+
   return (
     <main className="flex flex-col items-center justify-center absolute w-full h-full bg-black bg-opacity-80 top-0 left-0">
-      <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[40%] p-5 rounded-lg flex flex-col gap-y-4 self-center z-50">
+      <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[40%] p-5 rounded-lg flex flex-col gap-y-4">
         <Icon
           className="text-white w-7 h-7"
           icon={"ph:x-bold"}
@@ -125,22 +120,49 @@ export default function MintModal({
             setShowModal(false);
           }}
         />
-        <section className="bg-neutral-800 bg-opacity-5 dark:bg-background-700-dark  p-5 rounded-xl flex flex-row items-center justify-between relative">
-          <div className="">
-            <p className="font-satoshi-medium dark:text-white">Deposit</p>
+        <section className="bg-neutral-800 dark:bg-background-700-dark  bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
+          <div>
+            <p className="font-satoshi-medium dark:text-white">Burn</p>
             <input
               className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl dark:text-white"
               type="number"
+              value={quoteInput}
+              onChange={(e) => {
+                setQuoteInput(e.target.value);
+              }}
+              placeholder="0"
+              min={0}
+            />
+            <p className="text-neutral-500">1 QUOTE = 1 USD</p>
+          </div>
+
+          <DropDownView
+            className=""
+            defaultImage="./quote_coin.svg"
+            defaultOption="QUOTE"
+            toggling={mintToggling}
+            options={mintOptions}
+            selectedOption={selectedMintOption}
+            selectedImage={selectedMintImage}
+            isOpen={isMintOpen}
+            onOptionClicked={onMintOptionClicked}
+          />
+        </section>
+        <section className="bg-neutral-800 dark:bg-background-700-dark  bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
+          <div>
+            <p className="font-satoshi-medium dark:text-white">Redeem</p>
+            <input
+              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl dark:text-white"
+              type="number"
+              placeholder="0"
               value={ethInput}
               onChange={(e) => {
                 setEthInput(e.target.value);
               }}
               onFocus={handleFocus}
               onBlur={handleBlur}
-              placeholder="0"
               min={0}
             />
-
             <p className="text-neutral-500">1 ETH = ${ethValue}</p>
           </div>
 
@@ -157,43 +179,10 @@ export default function MintModal({
           />
         </section>
 
-        <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between relative">
-          <div>
-            <p className="font-satoshi-medium dark:text-white">Mint</p>
-            <input
-              className="bg-transparent focus:outline-none placeholder-neutral-500 font-satoshi-medium text-4xl dark:text-white"
-              type="number"
-              placeholder="0"
-              value={quoteInput}
-              onChange={(e) => {
-                setQuoteInput(e.target.value);
-              }}
-              min={0}
-            />
-
-            <p className="text-neutral-500">1 QUOTE = 1 USD</p>
-          </div>
-
-          <DropDownView
-            className=""
-            defaultImage="./quote_coin.svg"
-            defaultOption="QUOTE"
-            toggling={mintToggling}
-            options={mintOptions}
-            selectedOption={selectedMintOption}
-            selectedImage={selectedMintImage}
-            isOpen={isMintOpen}
-            onOptionClicked={onMintOptionClicked}
-          />
-        </section>
-
         <Button
           className=" disabled:bg-neutral-600 disabled:hover:scale-100"
           disabled={!connected}
-          onClick={() => {
-            MintToken(currentAccount, ethInput);
-          }}
-          text={`${connected ? "Mint" : "Connect Wallet"}`}
+          text={`${connected ? "Redeem" : "Connect Wallet"}`}
         />
       </body>
     </main>

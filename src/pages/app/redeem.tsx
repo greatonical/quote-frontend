@@ -107,8 +107,8 @@ export default function Redeem() {
 
   return (
     <main className="flex flex-col items-center justify-center pt-40 px-24">
-      <body className="bg-background-500 shadow-lg w-[50%] p-5 rounded-lg flex flex-col gap-y-4">
-        <section className="bg-neutral-800 bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
+      <body className="bg-background-500 dark:bg-background-500-dark shadow-lg w-[50%] p-5 rounded-lg flex flex-col gap-y-4">
+        <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
           <div>
             <p className="font-satoshi-medium">Burn</p>
             <input
@@ -136,7 +136,7 @@ export default function Redeem() {
             onOptionClicked={onMintOptionClicked}
           />
         </section>
-        <section className="bg-neutral-800 bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
+        <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
           <div>
             <p className="font-satoshi-medium">Redeem</p>
             <input

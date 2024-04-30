@@ -8,9 +8,10 @@ import { AppHeader,Header } from "./header";
 // import { TextInput, PasswordTextInput } from "./input";
 import { Line } from "./line";
 import MintModal from "./mint";
+import RedeemModal from "./redeem";
 // import { OTPModal, SuccessModal } from "./modal";
 // import { Sidebar } from "./sidebar";
 // import { HeaderText, SubText, Text } from "./text";
 // import { View } from "./view";
 
-export { Accordion, AppHeader,Header, Button,OutlinedButton, DropDownView, Line, Footer, MintModal };
+export { Accordion, AppHeader,Header, Button,OutlinedButton, DropDownView, Line, Footer, MintModal, RedeemModal };
