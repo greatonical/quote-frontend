@@ -93,8 +93,22 @@ export default function Dashboard() {
         <object className="flex flex-row justify-between mt-14">
           <p className="dark:text-white text-2xl">Positions</p>
           <span className="flex flex-row gap-x-4">
-            <a className="text-primary underline text-lg cursor-pointer" onClick={()=>{setShowMintModal(true)}}>Mint Quote</a>
-            <a className="text-primary underline text-lg cursor-pointer" onClick={()=>{setShowRedeemModal(true)}}>Burn Quote</a>
+            <a
+              className="text-primary underline text-lg cursor-pointer"
+              onClick={() => {
+                setShowMintModal(true);
+              }}
+            >
+              Mint Quote
+            </a>
+            <a
+              className="text-primary underline text-lg cursor-pointer"
+              onClick={() => {
+                setShowRedeemModal(true);
+              }}
+            >
+              Burn Quote
+            </a>
           </span>
         </object>
         <div className="dark:bg-holder p-5 rounded-xl mt-7">
