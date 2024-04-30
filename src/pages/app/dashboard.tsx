@@ -3,6 +3,7 @@ import { Button } from "@components";
 import { walletConnection, checkConnectedWallet } from "../../lib/utils";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { MintModal, RedeemModal } from "@components";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export default function Dashboard() {
   const [quoteInput, setQuoteInput] = useState("");
 
   const [connected, setConnected] = useState(false);
+  const [showMintModal, setShowMintModal] = useState(false);
+  const [showRedeemModal, setShowRedeemModal] = useState(false);
   const [currentAccount, setCurrentAccount] = useState();
   //   const [account] = useState();
 
@@ -90,8 +93,8 @@ export default function Dashboard() {
         <object className="flex flex-row justify-between mt-14">
           <p className="dark:text-white text-2xl">Positions</p>
           <span className="flex flex-row gap-x-4">
-            <a className="text-primary underline text-lg">Mint Quote</a>
-            <a className="text-primary underline text-lg">Burn Quote</a>
+            <a className="text-primary underline text-lg cursor-pointer" onClick={()=>{setShowMintModal(true)}}>Mint Quote</a>
+            <a className="text-primary underline text-lg cursor-pointer" onClick={()=>{setShowRedeemModal(true)}}>Burn Quote</a>
           </span>
         </object>
         <div className="dark:bg-holder p-5 rounded-xl mt-7">
@@ -115,6 +118,8 @@ export default function Dashboard() {
           />
         </div>
       </body>
+      {showMintModal && <MintModal setShowModal={setShowMintModal} />}
+      {showRedeemModal && <RedeemModal setShowModal={setShowRedeemModal} />}
     </main>
   );
 }
