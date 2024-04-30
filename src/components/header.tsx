@@ -9,6 +9,7 @@ import {
   openLink,
   RequestETHNetwork,
   RequestOPNetwork,
+  RequestScrollNetwork,
   scrolltoHash,
   walletConnection,
 } from "../lib/utils";
@@ -101,8 +102,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
   const options = [
-    { coin: "OP", image: "./op.svg" },
-    { coin: "ETH", image: "./eth.svg" },
+    { coin: "SCROLL", image: "./scroll.png" },
+    // { coin: "ETH", image: "./eth.svg" },
   ];
 
   
@@ -114,6 +115,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
       RequestOPNetwork()
     }else if (selectedOption === "ETH"){
       RequestETHNetwork()
+    }else if (selectedOption === "SCROLL"){
+      RequestScrollNetwork()
     }
     console.log("ss", selectedOption);
   };
@@ -180,8 +183,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
       <div className="flex flex-row gap-x-4">
         <ChainDropDownView
           className="absolute right-[24%]"
-          defaultImage="./op.svg"
-          defaultOption="OP"
+          defaultImage="./scroll.png"
+          defaultOption="SCROLL"
           toggling={toggling}
           options={options}
           selectedOption={selectedOption}
@@ -192,7 +195,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         <button
           className={`${
             connected
-              ? "border-primary border text-black w-52"
+              ? "border-primary border text-black dark:text-white w-52"
               : "bg-primary text-white hover:bg-pink-600 w-fit"
           } flex flex-row items-center text-ellipsis overflow-hidden  hover:scale-90  px-5 h-14 rounded-full transition-all gap-x-1`}
           onClick={() => {
@@ -203,7 +206,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             <Icon icon={"solar:wallet-bold"} className="w-4 h-4 text-primary" />
           ) : null}
           {/* <Icon icon={"solar:wallet-bold"} className="w-4 h-4 text-primary"/> */}
-          <p className="font-satoshi-medium">
+          <p className="font-satoshi-medium dark:text-white">
             {" "}
             {`${connected ? displayedCurrentAccountText : "Connect Wallet"}`}
           </p>

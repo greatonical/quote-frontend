@@ -117,6 +117,48 @@ export async function GetBalance(){
         return null
     }
 }
+export async function RequestScrollNetwork() {
+  //@ts-ignore
+  if (window.ethereum) {
+    // 1️⃣ Request Wallet Connection from Metamask
+    // ANSWER can be found here: https://docs.metamask.io/wallet/get-started/set-up-dev-environment/
+    // const accounts = YOUR CODE
+
+    // setConnected(accounts[0]);
+    //@ts-ignore
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // const a = await provider.send("eth_requestAccounts", []);
+
+    // let contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+
+    try {
+      //@ts-ignore
+      window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x8274F",
+            rpcUrls: ["https://sepolia-rpc.scroll.io/"],
+            chainName: "Scroll Alpha Testnet",
+            nativeCurrency: {
+                name: "ETH",
+                symbol: "ETH",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://sepolia.scrollscan.com"]
+        }]
+    });
+    } catch (error) {
+      console.error("User rejected request:", error);
+    }
+    // console.log(a);
+  } else {
+    // alert("No web3 provider detected");
+    // setShowWallets(true)
+    //@ts-ignore
+    document.getElementById("connectMessage").innerText =
+      "No web3 provider detected. Please install MetaMask.";
+  }
+}
 export async function RequestOPNetwork() {
   //@ts-ignore
   if (window.ethereum) {
@@ -289,7 +331,8 @@ export async function connectWallet(
     const a = await provider.send("eth_requestAccounts", []);
     setAccount(a[0]);
     setConnected(true);
-    RequestOPNetwork()
+    // RequestOPNetwork()
+    RequestScrollNetwork()
     console.log(account);
   } else {
     // alert("No web3 provider detected");
