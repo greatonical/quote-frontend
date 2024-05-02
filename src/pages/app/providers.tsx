@@ -149,6 +149,10 @@ export default function Provider() {
             </header>
             <div className={`bg-white opacity-15 w-full h-[0.5px] mt-4`} />
           </div>
+
+          <div className="flex flex-col items-center">
+<p className="text-neutral-500 text-center font-satoshi-medium text-xl mt-7">Coming soon....</p>
+</div>
         </body>
       </main>
     );

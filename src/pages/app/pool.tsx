@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, DropDownView } from "@components";
 import { checkConnectedWallet, walletConnection } from "../../lib/utils";
 import { Icon } from "@iconify/react";
-import { mintLETH } from "./utilFUnctions/PublicProviderFunctions";
+import { burnLETH, mintLETH } from "./utilFUnctions/PublicProviderFunctions";
 
 export default function Pool() {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function Pool() {
                 setEthInput(e.target.value);
               }}
             />
-             <p className="text-neutral-500">1 ETH = 1 LETH</p>
+            <p className="text-neutral-500">1 ETH = 1 LETH</p>
           </div>
 
           {!switchMode ? (
@@ -96,7 +96,10 @@ export default function Pool() {
           className="w-fit h-fit p-3 rounded-full bg-neutral-800 bg-opacity-5 "
           onClick={switchCoins}
         >
-          <Icon icon={"fluent:arrow-sort-24-regular"} className="w-10 h-10 dark:text-white" />
+          <Icon
+            icon={"fluent:arrow-sort-24-regular"}
+            className="w-10 h-10 dark:text-white"
+          />
         </button>
         <section className="bg-neutral-800 dark:bg-background-700-dark bg-opacity-5 p-5 rounded-xl flex flex-row items-center justify-between">
           <div>
@@ -142,9 +145,17 @@ export default function Pool() {
         </section>
 
         <Button
-            className="w-full disabled:bg-neutral-600 disabled:hover:scale-100"
-            disabled={!connected}
-          onClick={()=>{mintLETH(BigInt(ethInput))}}
+          className="w-full disabled:bg-neutral-600 disabled:hover:scale-100"
+          disabled={!connected}
+          onClick={() => {
+            !switchMode
+              ? mintLETH(BigInt(ethInput)).then(() =>
+                  alert("LETH minted successfully")
+                )
+              : burnLETH(BigInt(ethInput)).then(() =>
+                  alert("LETH burnt successfully")
+                );
+          }}
           text={`${connected ? "Deposit" : "Connect Wallet"}`}
         />
       </body>
